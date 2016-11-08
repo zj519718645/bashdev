@@ -1,0 +1,24 @@
+digraph archivedata
+{
+	node[shape="box"]
+	start[label="Start" shape="ellipse"]
+	end[shape="End" shape="ellipse"]
+	input[label="Input rule id, execution id" shape="parallelogram"]
+	getruleinfo[label="get rule (table id, table name) details information"]
+	checkchildtab[label="check if child table exist" shape="diamond"]
+	archivechildtab[label="achive child tables"]
+	archivecurrenttab[label="achive current table"]
+	commit[label="commit work"]
+
+	start -> input
+	input -> getruleinfo
+	getruleinfo -> checkchildtab
+	checkchildtab -> archivechildtab[label="Y"]
+	checkchildtab -> archivecurrenttab[label="NO"]
+	archivechildtab -> archivecurrenttab
+	archivecurrenttab -> commit
+	commit -> end
+
+
+
+}

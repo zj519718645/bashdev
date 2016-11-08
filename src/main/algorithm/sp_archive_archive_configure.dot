@@ -1,0 +1,71 @@
+// for DT 
+/*
+	check if DT installed vi query SELECT * FROM M_SERVICES where service_name = 'esserver' and ACTIVE
+	check if configuration exist via query SELECT * FROM \"SAP_TM_TRP\".\"sap.tm.trp.db.archive::t_archive_configuration
+	create extended table --
+	create global temporary table
+
+*/
+
+// for SDA 
+/*
+	check if any remote resource setup via select count(*) from REMOTE_SOURCES;
+	check if configuration exist via query SELECT * FROM \"SAP_TM_TRP\".\"sap.tm.trp.db.archive::t_archive_configuration
+
+*/
+
+digraph sp_archive_archive_configure
+{
+	node[shape="box"];
+
+	start -> input;
+	input -> checkType;
+
+	checkType -> checkDTInstall[label="Y"];
+	checkDTInstall -> checkDTWarmTab[label="Y"];
+	checkDTWarmTab -> checkDTConfigureExist[label="Y"];
+	checkDTConfigureExist -> createDTConfiguration[label="N"];
+	createDTConfiguration -> createGlobalTempTab;
+
+	checkDTConfigureExist -> clearDTConfiguration[label="Y"];
+	clearDTConfiguration -> createDTConfiguration;
+
+	checkDTWarmTab -> end[label="N"];
+	checkDTInstall -> end[label="N"];
+
+
+
+	checkType -> checkSDADriverSetup[label="N"];
+	checkSDADriverSetup -> checkSDAWarmTab[label="Y"];
+	checkSDAWarmTab -> checkSDAConfigureExist[label="Y"];
+	checkSDAConfigureExist -> createSDAConfiguration[label="N"];
+	createSDAConfiguration -> createGlobalTempTab;
+
+	checkSDAConfigureExist -> clearSDAConfiguration[label="Y"];
+
+	clearSDAConfiguration -> createSDAConfiguration;
+
+	checkSDADriverSetup -> end[label="N"];
+	checkSDAWarmTab -> end[label="N"];
+	createGlobalTempTab -> end;
+
+	start[shape="ellipse"];
+	input[label="input archive method", shape="parallelogram"];
+	checkType[label="archive method is Dynamic Tierring ?", shape="diamond"];
+	checkDTInstall[label="Dynamic Tierring Server installed ?", shape="diamond"];
+	checkDTWarmTab[label="Warm table exist in dynamic tiering server?", shape="diamond"];
+	checkSDAWarmTab[label="Warm table exist in remote source database ?", shape="diamond"];
+	
+	checkDTConfigureExist[label="does DT archive configuration Already exist ?", shape="diamond"];
+	clearDTConfiguration[label="clear existing DT configuration"];
+	createDTConfiguration[label="create DT configuration"];
+	clearSDAConfiguration[label="clear existing SDA configuration"];
+	createSDAConfiguration[label="create SDA configuration"];
+
+	createGlobalTempTab[label="create global warm and hot temp table"];
+	checkSDADriverSetup[label="Is there SAP IQ remote resource maintained ?", shape="diamond"];
+	checkSDAConfigureExist[label="does SDA archive configuration already exist ?", shape="diamond"];
+	end[shape="ellipse"];
+
+
+}

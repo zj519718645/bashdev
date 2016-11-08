@@ -1,0 +1,5 @@
+1. create city code and active city check for country code
+2. create location type
+3. create ownership code
+4. ABAP HANA user maintain
+5. create standard role

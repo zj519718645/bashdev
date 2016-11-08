@@ -1,0 +1,14 @@
+0.(optional) if you don't install TRP on same hana server of TM, you will need to import schema <SAPSID> into your hana via SLT and create synonyms via create_synonyms.sql and perform schema mapping SAPX0M<-->SLT configuration name
+1.(required)install HANA server SPS10 revision 93 or higher (OS root user)
+2.(required)install HANA AFL SPS10 or higher (OS root user)
+  (required)install HANA TRP-AFL SPS10 or higher (OS root user)
+3.(required)import HRF 1.0 patch 06 or higher, i.e. HCO_RULE_FW.tgz (SYSTEM PRIVILEGE: REPO.IMPORT AND OBJECTS PRIVILEGE: EXECUTE ON REPOSITORY_REST AND PACKAGE PRIVILEGE: sap)
+4.(required)run HRFConfiguration.sql to do HRF configuration and then restart HANA
+5.(required)import Application log develivery unit, i.e. HCO_BC_APPLOG_3.tgz
+6.(Optional)import UI5 1.28.29 delivery unit, i.e. SAPUI5_1-1.28.29.tgz
+7.(Optional)import TestTools (SYSTEM PRIVILEGE: REPO.IMPORT AND OBJECT PRIVILEGE: EXECUTE ON REPOSITORY_REST AND PACKAGE PRIVILEGE: sap))
+8.(Optional)if you failed to import DU last time, run TRPInitialize.sql to clear environment (SYSTEM PRIVILEGE: CREATE SCHEMA, INIFILE ADMIN, IMPORT AND OBJECT PRIVILEGE: EXECUTE ON _SYS_REPO.GRANT_SCHEMA_PRIVILEGE_ON_ACTIVATED_CONTENT, SELECT/DELETE ON SCHEMA _SYS_XS SCHEMA, SELECT/DELETE ON SCHEMA _SYS_REPO SCHEMA)
+9.(required)import HCO_TM_TRP (SYSTEM PRIVILEGE: REPO.IMPORT AND OBJECTS PRIVILEGE: EXECUTE ON REPOSITORY_REST)
+10.(required)create TRP TRPADM user via running UserCreation.sql part 1
+11.(required) complete the configurations mentioned in master guide chapter 6
+13.(optional) create TRP Depot manager and region manager via running UserCreation.sql part 2 and part 3

@@ -1,0 +1,126 @@
+digraph trp110systemlandscape
+{
+	node[shape="ellipse",fillcolor="lightblue",style="filled", fontsize="20", height="2", width="4"];
+	edge[fontsize="12"];
+	"developer 1";
+	"hana server 1";
+	"developer 2";
+	"hana server 2";
+	"developer 3";
+	"hana server 3";	
+	"developer n";
+	"hana server n";
+	"gerrit/git server";
+	"jenkins server";
+	"verify server (usage:
+ source code verify, xsjs unit execution and etc.)";
+	"dev unit test hana server (usage:
+ unit test by developers)";
+	"sprint integration test hana server (usage:
+ sprint test by Q)";
+	"module integration test hana server (usage:
+ MIT by Q)";
+	"regression test hana server (usage:
+ auto test by Q)";
+	"performance test hana server (usage:
+ performance test by Q)";
+	"X0M server (usage:
+ act as data source and etc.)";
+	"Y0M server for AT (usage:
+ internal AT and customer AT)";
+	"product assembly repository (usage:
+ hold TRP DU HCO_TM_TRP to perform assembly)";
+
+
+	"developer 1" -> "hana server 1"[label="commit"];
+	"hana server 1" -> "developer 1"[label="checkout"];
+	"developer 2" -> "hana server 2"[label="commit"];
+	"hana server 2" -> "developer 2"[label="checkout"];
+	"developer 3" -> "hana server 3"[label="commit"];
+	"hana server 3" -> "developer 3"[label="checkout"];	
+	"developer n" -> "hana server n"[label="commit"];
+	"hana server n" -> "developer n"[label="checkout"];
+
+	"developer 1" -> "gerrit/git server"[label="push/publish"];
+	"gerrit/git server" -> "developer 1"[label="pull/fetch"];	
+	"developer 2" -> "gerrit/git server"[label="push/publish"];
+	"gerrit/git server" -> "developer 2"[label="pull/fetch"];	
+	"developer 3" -> "gerrit/git server"[label="push/publish"];
+	"gerrit/git server" -> "developer 3"[label="pull/fetch"];		
+	"developer n" -> "gerrit/git server"[label="push/publish"];
+	"gerrit/git server" -> "developer n"[label="pull/fetch"];		
+
+	"gerrit/git server" -> "jenkins server"[label="clone/fetch"];
+	"jenkins server" -> "verify server (usage:
+ source code verify, xsjs unit execution and etc.)"[label="gerrit trigger"];
+	"jenkins server" -> "dev unit test hana server (usage:
+ unit test by developers)"[label="daily or manual trigger"];
+	/*
+	"jenkins server" -> "sprint integration test hana server (usage:
+ FIT by Q)"[label="manual trigger"];
+
+	"jenkins server" -> "module integration test hana server (usage:
+ MIT by Q)"[label="manual trigger"];
+
+	"jenkins server" -> "regression test hana server (usage:
+ auto test by Q)"[label="daily trigger"];
+*/
+
+/*
+"jenkins server" -> "X0M server (usage:
+ act as data source and etc.)"[label="weekly trigger"];
+*/
+/*
+"dev unit test hana server (usage:
+ unit test by developers)" -> "sprint integration test hana server (usage:
+ sprint test by Q)"[label="transport DU"];
+*/
+
+"jenkins server" -> "sprint integration test hana server (usage:
+ sprint test by Q)"[label="manual trigger"];
+
+ "sprint integration test hana server (usage:
+ sprint test by Q)" -> "module integration test hana server (usage:
+ MIT by Q)"[label="transport DU"];
+"sprint integration test hana server (usage:
+ sprint test by Q)" -> "regression test hana server (usage:
+ auto test by Q)"[label="transport DU"];
+"sprint integration test hana server (usage:
+ sprint test by Q)" -> "performance test hana server (usage:
+ performance test by Q)"[label="transport DU"];
+
+"module integration test hana server (usage:
+ MIT by Q)" -> "Y0M server for AT (usage:
+ internal AT and customer AT)"[label="transport DU"];
+
+
+"X0M server (usage:
+ act as data source and etc.)" -> "verify server (usage:
+ source code verify, xsjs unit execution and etc.)"[label="SLT replication"];
+"X0M server (usage:
+ act as data source and etc.)" -> "dev unit test hana server (usage:
+ unit test by developers)"[label="SLT replication"];
+"X0M server (usage:
+ act as data source and etc.)" -> "dev unit test hana server (usage:
+ unit test by developers)"[label="SLT replication"];
+"X0M server (usage:
+ act as data source and etc.)" -> "sprint integration test hana server (usage:
+ sprint test by Q)"[label="SLT replication"];
+"X0M server (usage:
+ act as data source and etc.)" -> "module integration test hana server (usage:
+ MIT by Q)"[label="SLT replication"];
+"X0M server (usage:
+ act as data source and etc.)" -> "regression test hana server (usage:
+ auto test by Q)"[label="SLT replication"];
+"X0M server (usage:
+ act as data source and etc.)" -> "performance test hana server (usage:
+ performance test by Q)"[label="SLT replication"];
+
+	"Y0M server for AT (usage:
+ internal AT and customer AT)" -> "product assembly repository (usage:
+ hold TRP DU HCO_TM_TRP to perform assembly)"[label="upload DU"];
+
+
+
+
+}

@@ -1,0 +1,66 @@
+digraph sp_archive_unarchivedata
+{
+
+	node[shape="box"];
+
+	start -> input;
+	input -> getroottabldetail;
+	getroottabldetail -> getExecutionId;
+	getExecutionId -> getunarchivedrows;
+	getunarchivedrows -> roottableisempty;
+	roottableisempty -> checkchildtab[label="N"];
+	roottableisempty -> end[label="Y"];
+	checkchildtab -> unarchive_root_tab[label="N"];
+	checkchildtab -> count_nodes[label="Y"];
+	count_nodes -> initialize;
+	initialize -> unachive_tab;
+	unachive_tab -> update_index;
+	update_index -> check_index;
+	check_index-> unachive_tab[label="Y"];
+	check_index -> unarchive_root_tab[label="N"];
+	unarchive_root_tab -> cleartemptab;
+	cleartemptab -> commit;
+	commit -> end;
+
+
+	start[shape="ellipse"];
+	input[label="input rule id, execution id", shape="parallelogram"];
+	getroottabldetail[label="get root table details"];
+	getExecutionId[label="get execution ID within given input"];
+	getunarchivedrows[label="retrieve unarchived rows from warm table into root temp table"];
+	roottableisempty[label="root temp table is empty ?", shape="diamond"];
+	checkchildtab[label="check if child table exist", shape="diamond"];
+	count_nodes[label="count = sum of child tables"];
+	initialize[label="i = 1"];
+	
+	
+	unarchive_root_tab[label="unarchive root table"];
+	cleartemptab[label="clear root temp table"];
+	commit[label="commit work"];
+	end[shape="ellipse"];
+
+	subgraph cluster_unachive_child_tabs
+	{	
+		label="unarchive child tables";
+		node[shape="box"];
+		bgcolor="mintcream";
+		count_nodes;
+		initialize;
+
+
+
+		subgraph cluster_unachive_child_tab
+		{
+			label="unachive one child table";
+			node[shape="box"];
+			bgcolor="mintcream";
+			unachive_tab[label="unachive child table"];
+			update_index[label="i ++"];
+			check_index[label="i <= count ?", shape="diamond"];
+		}
+
+	}
+
+	
+
+}

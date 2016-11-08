@@ -1,0 +1,71 @@
+digraph sp_archive_archivedata
+{
+
+	node[shape="box"];
+
+	start -> input;
+	input -> getruleinfo;
+	getruleinfo -> temp_save_root_tab_archived_rows;
+	temp_save_root_tab_archived_rows -> root_tab_empty;
+	root_tab_empty -> checkchildtab[label="N"];
+	root_tab_empty -> end[label="Y"];
+	checkchildtab -> fetch_sub_tab[label="Y"];
+	fetch_sub_tab -> initial_index;
+	initial_index -> temp_save_child_tab_archived_rows;
+	temp_save_child_tab_archived_rows -> move_child_data_to_warm_tab;
+	move_child_data_to_warm_tab -> clear_child_temp_tab;
+	clear_child_temp_tab -> update_index;
+	update_index -> check_index;
+	check_index -> move_root_data_to_warm_tab[label="N" ];
+	check_index -> temp_save_child_tab_archived_rows[label="Y"];
+	checkchildtab -> move_root_data_to_warm_tab[label="N"];
+	move_root_data_to_warm_tab -> clear_root_temp_tab;
+	clear_root_temp_tab -> commit;
+	commit -> end;
+
+
+
+	
+
+	start[label="Start", shape="ellipse"];
+	end[shape="End", shape="ellipse"];
+	input[label="Input rule id, execution id", shape="parallelogram"];
+	getruleinfo[label="get root table details"];
+	temp_save_root_tab_archived_rows[label="move archived rows of root table into temporary table"];
+	root_tab_empty[label="root table is empty?", shape="diamond"];
+	checkchildtab[label="check if child table exist", shape="diamond"];
+	
+	subgraph cluster_archive_sub_tab
+	{	
+		label="archive chidren tables";
+		shape="box";
+		bgcolor="mintcream";
+		node[shape="box"]
+		fetch_sub_tab[label="count = sum of child table"];
+		initial_index[label= "i=1"];
+		subgraph cluster_archive_node_tab
+		{	
+			label="archive child table";
+			temp_save_child_tab_archived_rows[label="move achived rows from child table into temporary table"];
+			move_child_data_to_warm_tab[label="insert data from temporary table to warm table"];
+			clear_child_temp_tab[label="clear child temporary table"];
+
+		}
+		
+		update_index[label="i++"];
+		check_index[label="i <= count?", shape="diamond"];
+	}
+
+	subgraph cluster_archive_root_tab
+	{
+		bgcolor="mintcream";
+		label="achive root table";
+		move_root_data_to_warm_tab[label="delete data from root table and inser data from temporary table to  root warm table"];
+		
+
+	}
+
+	clear_root_temp_tab[label="clear root temporary table"];
+	commit[label="commit work"];
+
+}

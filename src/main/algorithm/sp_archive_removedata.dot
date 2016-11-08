@@ -1,0 +1,64 @@
+digraph sp_archive_removedata
+{
+
+	node[shape="box"];
+
+	start -> input;
+	input -> getroottabldetail;
+	getroottabldetail -> getremovalrows;
+	getremovalrows -> roottableisempty;
+	roottableisempty -> checkchildtab[label="N"];
+	roottableisempty -> end[label="Y"];
+	checkchildtab -> remove_root_tab[label="N"];
+	checkchildtab -> count_nodes[label="Y"];
+	count_nodes -> initialize;
+	initialize -> remove_child_warm_tab;
+	remove_child_warm_tab -> update_index;
+	update_index -> check_index;
+	check_index-> remove_child_warm_tab[label="Y"];
+	check_index -> remove_root_tab[label="N"];
+	remove_root_tab -> cleartemptab;
+	cleartemptab -> commit;
+	commit -> end;
+
+
+	start[shape="ellipse"];
+	input[label="input rule id, execution id", shape="parallelogram"];
+	getroottabldetail[label="get root table details"];
+	getremovalrows[label="retrieve removal rows from warm table into root temp table"];
+	roottableisempty[label="root temp table is empty ?", shape="diamond"];
+	checkchildtab[label="check if child table exist", shape="diamond"];
+	count_nodes[label="count = sum of child tables"];
+	initialize[label="i = 1"];
+	
+	
+	remove_root_tab[label="remove data from root warm table"];
+	cleartemptab[label="clear root temp table"];
+	commit[label="commit work"];
+	end[shape="ellipse"];
+
+	subgraph cluster_unachive_child_tabs
+	{	
+		label="remove data from child warm tables";
+		node[shape="box"];
+		bgcolor="mintcream";
+		count_nodes;
+		initialize;
+
+
+
+		subgraph cluster_unachive_child_tab
+		{
+			label="remove data from one child warm table";
+			node[shape="box"];
+			bgcolor="mintcream";
+			remove_child_warm_tab[label="remove data from child table"];
+			update_index[label="i ++"];
+			check_index[label="i <= count ?", shape="diamond"];
+		}
+
+	}
+
+	
+
+}

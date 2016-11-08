@@ -1,0 +1,39 @@
+--add repostory source
+zypper ar http://smtproxy.wdf.sap.corp:1080/repo/RCE/SLE11-SP4-SAP-Pool/sle-11-x86_64/ sles11sp4pool
+
+
+---------------transparent huge page issue
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+echo transparent_hugepage=never >> /etc/init.d/boot.local
+echo transparent_hugepage=never >> /etc/grub.conf
+echo transparent_hugepage=never >> /etc/rc.local
+echo "transparent_hugepage=never" >> /boot/grub/menu.lst
+
+
+--------------------configure page cache
+echo 4096 > /proc/sys/vm/pagecache_limit_mb
+echo 2 > /proc/sys/vm/pagecache_limit_ignore_dirty
+
+echo vm.pagecache_limit_mb = 4096 >> /etc/sysctl.conf
+echo vm.pagecache_limit_ignore_dirty = 2 >> /etc/sysctl.conf
+
+
+
+------------------------
+
+
+upgrade glibc
+remove ulimit
+upgrade 
+
+upgrade libgcc_s1 and libstdc++6
+
+
+
+mkdir /trp_backup
+chmod 777 /trp_backup
+
+echo "10.58.184.152   pvgl50818592" >> /etc/hosts
+
+echo "pvgl50818592:/trp_backup   /trp_backup nfs     defaults        0       0" >> /etc/fstab
+

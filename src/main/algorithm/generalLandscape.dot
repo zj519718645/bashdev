@@ -1,0 +1,76 @@
+digraph generalhanascape
+{
+	node[shape="ellipse",fillcolor="lightblue",style="filled", fontsize="20", height="2", width="4"];
+	edge[fontsize="12"];
+	"developer 1";
+	"hana server 1";
+	"developer 2";
+	"hana server 2";
+	"developer 3";
+	"hana server 3";	
+	"developer n";
+	"hana server n";
+	"git server";
+	"jenkins server";
+	"verify server (usage:
+ source code verify, xsjs unit execution and etc.)";
+	"dev unit test hana server (usage:
+ unit test by developers)";
+	"sprint integration test hana server (usage:
+ sprint test by Q)";
+	/*
+	"module integration test hana server (usage:
+ MIT by Q)";
+ 	*/
+	"regression test hana server (usage:
+ auto test by Q)";
+	"performance test hana server (usage:
+ performance test by Q)";
+
+
+	"developer 1" -> "hana server 1"[label="commit"];
+	"hana server 1" -> "developer 1"[label="checkout"];
+	"developer 2" -> "hana server 2"[label="commit"];
+	"hana server 2" -> "developer 2"[label="checkout"];
+	"developer 3" -> "hana server 3"[label="commit"];
+	"hana server 3" -> "developer 3"[label="checkout"];	
+	"developer n" -> "hana server n"[label="commit"];
+	"hana server n" -> "developer n"[label="checkout"];
+
+	"developer 1" -> "git server"[label="push/publish"];
+	"git server" -> "developer 1"[label="pull/fetch"];	
+	"developer 2" -> "git server"[label="push/publish"];
+	"git server" -> "developer 2"[label="pull/fetch"];	
+	"developer 3" -> "git server"[label="push/publish"];
+	"git server" -> "developer 3"[label="pull/fetch"];		
+	"developer n" -> "git server"[label="push/publish"];
+	"git server" -> "developer n"[label="pull/fetch"];		
+
+	"git server" -> "jenkins server"[label="clone/fetch"];
+	"jenkins server" -> "verify server (usage:
+ source code verify, xsjs unit execution and etc.)"[label="gerrit trigger"];
+	"jenkins server" -> "dev unit test hana server (usage:
+ unit test by developers)"[label="daily or manual trigger"];
+
+
+"jenkins server" -> "sprint integration test hana server (usage:
+ sprint test by Q)"[label="manual trigger"];
+
+"sprint integration test hana server (usage:
+ sprint test by Q)" -> "performance test hana server (usage:
+ performance test by Q)"[label="transport DU"];
+
+"sprint integration test hana server (usage:
+ sprint test by Q)" -> "regression test hana server (usage:
+ auto test by Q)"[label="transport DU"];
+
+"regression test hana server (usage:
+ auto test by Q)" -> "Demo server (usage: Demo)"[label="transport DU"];
+
+
+
+
+
+
+
+}

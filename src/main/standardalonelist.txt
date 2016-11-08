@@ -1,0 +1,38 @@
+SELECT DISTINCT BASE_OBJECT_NAME FROM "OBJECT_DEPENDENCIES" WHERE BASE_SCHEMA_NAME IN ('SAPTM','SAPX0M')
+AND DEPENDENT_SCHEMA_NAME IN ('SAP_HRF','SAP_TM_TRP','SAP_TM_ROUTING','_SYS_BIC');
+
+
+
+
+
+
+
+
+SELECT DISTINCT DEPENDENT_OBJECT_NAME,BASE_OBJECT_NAME AS BASED_PROVIDER_NAME FROM "OBJECT_DEPENDENCIES" 
+WHERE BASE_SCHEMA_NAME IN ('SAPTM')
+AND DEPENDENT_SCHEMA_NAME IN ('SAP_HRF','SAP_TM_TRP','SAP_TM_ROUTING','_SYS_BIC')
+AND DEPENDENCY_TYPE = 1
+ORDER BY DEPENDENT_OBJECT_NAME;
+
+
+
+
+
+
+
+
+
+SELECT DEPENDENT_OBJECT_NAME,BASE_OBJECT_NAME AS BASED_PROVIDER_NAME FROM "OBJECT_DEPENDENCIES" WHERE BASE_SCHEMA_NAME = 'SAP_TM_TRP' AND BASE_OBJECT_NAME IN (
+'sap.tm.trp.db.transportation::v_transportation_order',
+'sap.tm.trp.db.transportation::v_transportation_order_execution',
+'sap.tm.trp.db.transportation::v_transportation_order_item',
+'sap.tm.trp.db.transportation::v_transportation_order_item_attributes',
+'sap.tm.trp.db.transportation::v_transportation_order_item_location',
+'sap.tm.trp.db.transportation::v_transportation_stage',
+'sap.tm.trp.db.transportation::v_transportation_stop'                     
+)
+AND DEPENDENT_SCHEMA_NAME IN ('SAP_HRF','SAP_TM_TRP','SAP_TM_ROUTING','_SYS_BIC')
+AND DEPENDENCY_TYPE = 1
+ORDER BY DEPENDENT_OBJECT_NAME;
+
+

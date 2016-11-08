@@ -1,0 +1,10 @@
+COST MODEL: Simulation plan , Location rule
+TIME FILTER: Plans
+ALERT RULE GROUP: Plans
+CALCULATION MODEL: SD plan , KPI plan
+Supply and Demand Alert: SD Alert Rule Group
+KPI Alert: KPI Alert Rule Group
+Location Determination Rule: Location rule
+
+scheduled SD Plan: virtual SD plan, pickup/return location rule, simulation plan
+scheduled KPI Plan: Virtual KPI Plan

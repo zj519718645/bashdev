@@ -1,0 +1,33 @@
+1. find out all table locks
+select a.connection_id as connection_id,
+a.parent_connection_id as parent_connection_id,
+b.acquired_time as lock_time,
+b.schema_name as schema_name,
+b.table_name as table_name
+from "PUBLIC"."M_CONNECTIONS" as a 
+inner join "PUBLIC"."M_TABLE_LOCKS" as b
+on a.transaction_id = b.lock_owner_transaction_id;
+
+2. set lock timeout in HANA configuration-->indexserver.ini-->transaction-->lock_timeout default is 1800000ms
+
+3. ERROR: a "ROWSTORE" or "COLUMNSTORE" table type cannot be changed to "TEMPORARY" and vice versa
+	drop runtime tables accordingly
+	e.g.:
+		DROP TABLE "SAP_TM_TRP"."sap.tm.trp.db.hrf.resourceStock.bubbleView::t_hrf_resourceStockBubbleView_outputGlobalTemp";
+		DROP TABLE "SAP_TM_TRP"."sap.tm.trp.db.hrf.resourceStock.alertView::t_hrf_resourceStockAlertView_outputGlobalTemp";
+		DROP TABLE "SAP_TM_TRP"."sap.tm.trp.db.hrf.resourceStock::t_hrf_resourceStock_inputGlobalTemp";
+		DROP TABLE "SAP_TM_TRP"."sap.tm.trp.db.hrf.resourceStock.alertView::t_trp_hrf_resourceStockAlertView_score_output";
+
+4.	ERROR: initTimeZone.cpp(00024) : zonerule "VERM02" in unexpected format (examples "M0130", "P0100")
+	DELETE some tzones in table TTZZ accordingly
+		DELETE FROM "SYSTEM"."TTZZ" WHERE TZONE IN ('VERM02','VERM10','VERP02','VERP10');
+
+
+5.	where preform SQL: 
+	IMPORT FROM CSV FILE '/home/Zhouadm/data.csv' INTO "I075181"."TRACKING_20150209" WITH THREADS 20 SKIP FIRST 1 ROW RECORD DELIMITED BY '\n' FIELD DELIMITED BY ';';
+	ERROR:  Cannot load table from the specified path
+	SOLUTION: set value of configuration csv_import_path_filter to false
+
+
+
+

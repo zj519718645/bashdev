@@ -1,0 +1,11 @@
+import tables of schema SAPX0M
+assign privilege on schema SAPX0M to _SYS_REPO, with grant to others options
+run initial script
+import HRF du
+assign hrfadmin and hrfsourcecreator privilege to installer user
+configure HRF
+import SAP APPLOG du
+assign lm administrator to installer user
+import TRP DU
+start scriptserver service in HANA
+follow TRP 1.0 master guide section 6 to configure technique user and etc

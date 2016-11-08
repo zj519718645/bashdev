@@ -1,0 +1,4 @@
+1. When refering to calcuation view from _SYS_BIC  in hdbprocedure or script-based calculationview, please use select from "_SYS_BIC", don't use call "_SYS_BIC";
+2. When refering to table from SAPX0M in hdbprocedure, hdbview and script-based calcuation view, please use synonyms name, don't use schema name SAPX0M directly;
+3. Fill all dependent objects in depends_on [] list in hdbview definition;
+4. specify default schema SAP_TM_TRP in hdbprocedure and script-based calcuation view;
