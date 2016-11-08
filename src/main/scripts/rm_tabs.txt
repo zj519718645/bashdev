@@ -1,0 +1,5 @@
+sap.tm.trp.db.kpi::t_start_time_for_user
+sap.tm.trp.db.leasecontract::t_leased_equipment_event_history
+sap.tm.trp.db.pickupreturn::t_location_rule
+sap.tm.trp.db.systemmanagement::t_config
+sap.tm.trp.db.systemmanagement::t_resource_category

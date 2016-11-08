@@ -1,0 +1,485 @@
+
+
+==========================new tables=========================
+/sap/tm/trp/db/costmodel/t_uom_mapping.hdbtable
+/sap/tm/trp/db/pickupreturn/t_filter_execution_t.hdbtable
+/sap/tm/trp/db/pickupreturn/t_optimization_t.hdbtable
+/sap/tm/trp/db/pickupreturn/t_rule_type_t.hdbtable
+/sap/tm/trp/db/pickupreturn/t_schedule_time_type_t.hdbtable
+/sap/tm/trp/db/pickupreturn/t_time_range_unit_t.hdbtable
+/sap/tm/trp/db/planningcockpit/railcarmtr/t_transportation_means_railcar.hdbtable
+/sap/tm/trp/db/planningcockpit/t_load_discharge_activity_detail.hdbtable
+/sap/tm/trp/db/planningcockpit/t_network_setting_change_history_t.hdbtable
+/sap/tm/trp/db/semantic/common/t_config.hdbtable
+/sap/tm/trp/db/semantic/common/t_config_pre.hdbtable
+/sap/tm/trp/db/semantic/common/t_domain_ext.hdbtable
+/sap/tm/trp/db/semantic/common/t_partnertype_t.hdbtable
+/sap/tm/trp/db/semantic/resource/t_resource_category.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_config_t.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_map_provider_t.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_repositioning_config_parameters.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_repositioning_config_parameters_t.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_repositioning_config_parameters_value.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_resource_category_extended_columns.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_resource_category_object_registration.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_resource_category_settings.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_resource_category_settings_t.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_resource_category_type_group_type.hdbtable
+/sap/tm/trp/db/systemmanagement/customization/t_resource_group.hdbtable
+/sap/tm/trp/db/systemmanagement/t_config_cust.hdbtable
+/sap/tm/trp/db/systemmanagement/t_domain_ext.hdbtable
+/sap/tm/trp/db/systemmanagement/t_trq_category.hdbtable
+/sap/tm/trp/db/systemmanagement/t_tu_category.hdbtable
+/sap/tm/trp/db/systemmanagement/user/t_role_resource.hdbtable
+/sap/tm/trp/routing/db/path/t_route_sequence_capacity.hdbtable
+=============================================================
+
+
+========================removed tables=======================
+/sap/tm/trp/db/kpi/t_start_time_for_user.hdbtable
+/sap/tm/trp/db/leasecontract/t_leased_equipment_event_history.hdbtable
+/sap/tm/trp/db/pickupreturn/t_location_rule.hdbtable
+/sap/tm/trp/db/systemmanagement/t_config.hdbtable
+/sap/tm/trp/db/systemmanagement/t_resource_category.hdbtable
+=============================================================
+
+
+======================updated tables=========================
+13c13,14
+<     {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;}
+---
+>     {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;},
+>     {name = "RESOURCE_CATEGORY";sqlType = NVARCHAR; length = 20;}
+/sap/tm/trp/db/alert/alert_rule_group/t_alert_rule_group.hdbtable
+-----------------------------------------------------------------
+4,6c4,6
+<     {name = "ALERT_RULE_GROUP_CATEGORY_ID"; sqlType = INTEGER; comment="1:Planning Alerts, 2:KPI";},
+<     {name = "ALERT_RULE_GROUP_CATEGORY_NAME"; sqlType = VARCHAR; length = 50; comment="1:Planning Alerts, 2:KPI Alerts";},
+<     {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true; unique = true;},
+---
+>     {name = "ALERT_RULE_GROUP_CATEGORY_ID"; sqlType = INTEGER; comment="1:Supply and Demand Alerts, 2:KPI";},
+>     {name = "ALERT_RULE_GROUP_CATEGORY_NAME"; sqlType = VARCHAR; length = 50; comment="1:Supply and Demand Alerts, 2:KPI Alerts";},
+>     {name = "CODE";sqlType = NVARCHAR; length = 50; nullable = true; unique = true;},
+10a11,13
+>     },
+>     {
+>     	name = "RESOURCE_CATEGORY";sqlType = NVARCHAR; length = 20;
+/sap/tm/trp/db/alert/alert_rule_group/t_alert_rule_group_category.hdbtable
+-----------------------------------------------------------------
+17,18c17,18
+<     {name = "CUSTOM";  sqlType = TINYINT;comment = "0: No , 1: Yes ";}
+<     
+---
+>     {name = "CUSTOM";  sqlType = TINYINT;comment = "0: No , 1: Yes ";},
+>     {name = "DEFAULT";  sqlType = TINYINT;comment = "0: No , 1: Yes ";}
+/sap/tm/trp/db/common/t_delivered_fields.hdbtable
+-----------------------------------------------------------------
+5c5,6
+<     {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;}
+---
+>     {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;},
+>     {name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/common/t_extended_fields_page_type.hdbtable
+-----------------------------------------------------------------
+18c18,19
+<     {name = "LAST_MODIFIED_ON"; sqlType = TIMESTAMP; nullable = true;}
+---
+>     {name = "LAST_MODIFIED_ON"; sqlType = TIMESTAMP; nullable = true;},
+>     {name = "RESOURCE_CATEGORY"; sqlType = NVARCHAR; length = 20;nullable = true;} 
+/sap/tm/trp/db/costmodel/t_cost_dataset.hdbtable
+-----------------------------------------------------------------
+11c11,12
+<     {name = "LAST_MODIFIED_ON"; sqlType = TIMESTAMP; nullable = true;}
+---
+>     {name = "LAST_MODIFIED_ON"; sqlType = TIMESTAMP; nullable = true;},
+>     {name = "RESOURCE_CATEGORY"; sqlType = NVARCHAR; length = 20;nullable = true;} 
+/sap/tm/trp/db/costmodel/t_cost_model_new.hdbtable
+-----------------------------------------------------------------
+11c11,12
+< 	{name = "MODIFIED_TIME"; sqlType = TIMESTAMP;}
+---
+> 	{name = "MODIFIED_TIME"; sqlType = TIMESTAMP;},
+> 	{name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/dashboard/t_tile.hdbtable
+-----------------------------------------------------------------
+18c18,20
+< 	{name = "ACTIVE"; sqlType = TINYINT; nullable = false; defaultValue = "1";}
+---
+> 	{name = "ACTIVE"; sqlType = TINYINT; nullable = false; defaultValue = "1";},
+> 	{name = "RESOURCE_CATEGORY"; sqlType = NVARCHAR; length = 50; nullable = false;},
+> 	{name = "UNIT_TYPE"; sqlType = NVARCHAR; length = 50; nullable = false;}
+/sap/tm/trp/db/dataprovisioning/t_lease_contract_ext_src.hdbtable
+-----------------------------------------------------------------
+12c12,13
+< 	{name = "MODIFIED_TIME"; sqlType = TIMESTAMP;}
+---
+> 	{name = "MODIFIED_TIME"; sqlType = TIMESTAMP;},
+> 	{name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/filter/t_attribute_group.hdbtable
+-----------------------------------------------------------------
+6c6
+< 	{name = "CODE"; sqlType = VARCHAR; length = 20; nullable = false; unique = true;},
+---
+> 	{name = "CODE"; sqlType = VARCHAR; length = 25; nullable = false; unique = true;},
+9c9,10
+< 	{name = "VALUE_TYPE"; sqlType = VARCHAR; length = 50;}
+---
+> 	{name = "VALUE_TYPE"; sqlType = VARCHAR; length = 50;},
+> 	{name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/filter/t_attribute_group_attribute.hdbtable
+-----------------------------------------------------------------
+12c12,13
+<   {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true; unique = true;}
+---
+>   {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true; unique = true;},
+>   {name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/filter/t_location_filter.hdbtable
+-----------------------------------------------------------------
+16a17
+>     {name = "RESOURCE_CATEGORY"; sqlType = VARCHAR; length = 50;},
+/sap/tm/trp/db/hrf/resourceStock/alertView/t_hrf_resourceStockAlertView_outputGlobalTemp.hdbtable
+-----------------------------------------------------------------
+4a5
+>     {name = "RESOURCE_CATEGORY"; sqlType = VARCHAR; length = 50;},
+/sap/tm/trp/db/hrf/resourceStock/t_hrf_resourceStock_inputGlobalTemp.hdbtable
+-----------------------------------------------------------------
+15,16c15,16
+<     {name = "MAX_CAPACITY"; sqlType = DOUBLE;}
+<     
+---
+>     {name = "MAX_CAPACITY"; sqlType = DOUBLE;},
+>     {name = "RESOURCE_CATEGORY"; sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/hrf/resourceStock/t_resource_stock.hdbtable
+-----------------------------------------------------------------
+14c14,15
+<     {name = "CODE";sqlType = NVARCHAR; length = 20;unique = true;}
+---
+>     {name = "CODE";sqlType = NVARCHAR; length = 20;unique = true;},
+>     {name = "RESOURCE_CATEGORY";  sqlType = NVARCHAR; length = 50;}
+/sap/tm/trp/db/hrf/ruleManage/ruleGroup/t_rule.hdbtable
+-----------------------------------------------------------------
+6c6
+<     {name = "DESC"; sqlType = VARCHAR; length = 500; nullable = false;}
+---
+>     {name = "DESC"; sqlType = VARCHAR; length = 500; nullable = true;}
+/sap/tm/trp/db/hrf/ruleManage/ruleGroup/t_rule_t.hdbtable
+-----------------------------------------------------------------
+21c21,23
+< 	{name = "LEASE_TYPE_CODE"; sqlType = NVARCHAR; length = 22; nullable = false;}
+---
+> 	{name = "LEASE_TYPE_CODE"; sqlType = NVARCHAR; length = 22; nullable = false;},
+> 	{name = "RESOURCE_CATEGORY"; sqlType = NVARCHAR; length = 22; nullable = false;},
+> 	{name = "UNIT_TYPE"; sqlType = NVARCHAR; length = 50; nullable = false;}
+/sap/tm/trp/db/leasecontract/t_lease_contract.hdbtable
+-----------------------------------------------------------------
+6c6,8
+<     {name = "NAME"; sqlType = VARCHAR; length = 50;}
+---
+>     {name = "NAME"; sqlType = VARCHAR; length = 50;},
+>     {name = "RESOURCE_CATEGORY"; sqlType = VARCHAR; length = 10;},
+>     {name = "TYPE"; sqlType = INTEGER; nullable = false;}
+/sap/tm/trp/db/objectregistration/t_object_type.hdbtable
+-----------------------------------------------------------------
+19c19
+<     {name = "OP_SETTING_TYPE"; sqlType = INTEGER;comment="1:location 2:Opt 3:location+Opt";},
+---
+>     {name = "OP_SETTING_TYPE"; sqlType = INTEGER;comment="1:location 2:Opt 3:location+Opt 4:Nothing";},
+21c21
+<     {name = "OPTIMIZATION"; sqlType = INTEGER;comment="1:cost based :balancing based 3:cost+balancing";},
+---
+>     {name = "OPTIMIZATION"; sqlType = INTEGER;comment="1:cost based 3:cost+balancing";},
+31c31,34
+<     {name = "NETWORK_SETTING_GROUP_ID"; sqlType = BIGINT;}
+---
+>     {name = "NETWORK_SETTING_GROUP_ID"; sqlType = BIGINT;},
+>     {name = "TIME_WINDOW_SECONDS"; sqlType = BIGINT;},
+>     {name = "RANK_NUMBER"; sqlType = INTEGER;},
+>     {name = "RESOURCE_CATEGORY";  sqlType = VARCHAR; length = 50;} 
+/sap/tm/trp/db/pickupreturn/t_location_assignment_rule.hdbtable
+-----------------------------------------------------------------
+67a68,70
+>     {name = "STREETTURN_TU_ID"; sqlType = NVARCHAR; length = 20;},
+>     {name = "INVALID"; sqlType = INTEGER;},
+>     {name = "PLAN_STATUS"; sqlType = VARCHAR;length = 5;} ,
+68a72
+>       
+/sap/tm/trp/db/pickupreturn/t_location_assignment_tu_staging.hdbtable
+-----------------------------------------------------------------
+21a22
+>     {name = "STREETTURN_TU_ID";sqlType = VARCHAR; length = 22;},
+29c30
+< table.primaryKey.pkcolumns = ["RUN_ID","RULE_ID","TU_ID","USER"];    
+---
+>  
+/sap/tm/trp/db/pickupreturn/t_location_rule_assign_error.hdbtable
+-----------------------------------------------------------------
+14a15
+>     {name = "STREETTURN_TU_ID";sqlType = VARCHAR; length = 22;},
+/sap/tm/trp/db/pickupreturn/t_location_rule_assign_result.hdbtable
+-----------------------------------------------------------------
+53,54c53,56
+<     {name = "VESSEL_POD";sqlType = VARCHAR; length = 35;}
+<     
+---
+>     {name = "VESSEL_POD";sqlType = VARCHAR; length = 35;},
+>     {name = "STREETTURN_TU_ID"; sqlType = NVARCHAR; length = 20;},
+>     {name = "INVALID"; sqlType = INTEGER;},
+>     {name = "PLAN_STATUS"; sqlType = VARCHAR;length = 5;}       
+/sap/tm/trp/db/pickupreturn/t_location_rule_assignment_draft.hdbtable
+-----------------------------------------------------------------
+6c6
+<     {name = "DESC"; sqlType = VARCHAR; length = 500; nullable = false;}
+---
+>     {name = "DESC"; sqlType = VARCHAR; length = 500; nullable = true;}
+/sap/tm/trp/db/pickupreturn/t_location_rule_t.hdbtable
+-----------------------------------------------------------------
+14c14,15
+<     {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true; unique = true;}    
+---
+>     {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true; unique = true;},
+>     {name = "RESOURCE_CATEGORY";  sqlType = NVARCHAR; length = 50;}    
+/sap/tm/trp/db/pipeline/t_pipeline_model.hdbtable
+-----------------------------------------------------------------
+20c20
+<     {name = "STATUS"; sqlType = SMALLINT;comment = "0 for Valid; 1 for Need Check; 2 for Invalid";},
+---
+>     {name = "STATUS"; sqlType = SMALLINT;comment = "0 OK; 1 Plan Changed; 2 Invalid Plan(only virtual plan have this status); 3: Not Executed;4:Execution Failed";},
+/sap/tm/trp/db/pipeline/t_plan_model.hdbtable
+-----------------------------------------------------------------
+11c11
+<     {name = "COST"; sqlType = DECIMAL; nullable = true; precision = 13; scale = 3;},  
+---
+>     {name = "COST"; sqlType = DECIMAL; nullable = true; precision = 20; scale = 3;},  
+/sap/tm/trp/db/planningcockpit/t_activity.hdbtable
+-----------------------------------------------------------------
+13,14c13,14
+<     {name = "MODIFIED_AT"; sqlType = TIMESTAMP;}
+<     
+---
+>     {name = "MODIFIED_AT"; sqlType = TIMESTAMP;},
+>     {name = "RESOURCE_CATEGORY"; sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/planningcockpit/t_network_setting_group.hdbtable
+-----------------------------------------------------------------
+16c16,17
+<     {name = "STATUS"; sqlType = SMALLINT; comment = "0 for Valid; 1 for Need Check; 2 for Invalid";}
+---
+>     {name = "STATUS"; sqlType = SMALLINT; comment = "0 for Valid; 1 for Need Check; 2 for Invalid";},
+>     {name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/planningcockpit/t_simulation_plan.hdbtable
+-----------------------------------------------------------------
+6c6,7
+<     {name = "DESC"; sqlType = VARCHAR; length = 500; nullable = true;}
+---
+>     {name = "DESC"; sqlType = NVARCHAR; length = 500; nullable = true;},
+>     {name = "NAME"; sqlType = NVARCHAR;length = 50; nullable = true;}
+7a9
+>  
+/sap/tm/trp/db/planningcockpit/t_status.hdbtable
+-----------------------------------------------------------------
+7c7,8
+<     {name = "DESC"; sqlType = VARCHAR; length = 500; nullable = true;}
+---
+>     {name = "DESC"; sqlType = NVARCHAR; length = 500; nullable = true;},
+>     {name = "NAME"; sqlType = NVARCHAR; length = 50; nullable = true;}
+/sap/tm/trp/db/planningcockpit/t_status_t.hdbtable
+-----------------------------------------------------------------
+6a7,9
+>     {name = "STATUS"; sqlType = VARCHAR; length = 10; nullable = true;},
+>     {name = "TM_STATUS"; sqlType = VARCHAR; length = 1;},
+>     {name = "MESSAGE"; sqlType = NVARCHAR; length = 1000; nullable = true;},
+18,19d20
+<     {name = "MESSAGE"; sqlType = NVARCHAR; length = 1000; nullable = true;},
+<     {name = "STATUS"; sqlType = VARCHAR; length = 10; nullable = true;},
+25c26
+< table.primaryKey.pkcolumns = ["ID","SCENARIO_ID","ACTIVITY_ID"];
+\ No newline at end of file
+---
+> table.primaryKey.pkcolumns = ["ID"];
+\ No newline at end of file
+/sap/tm/trp/db/planningcockpit/t_trq_write_log.hdbtable
+-----------------------------------------------------------------
+14c14
+< table.primaryKey.pkcolumns = ["LOCATION_ID", "LOCATION_TYPE", "EQUIP_CODE", "EQUIP_CODE_TYPE","LOCATION_HEAD_FLAG"];
+---
+> table.primaryKey.pkcolumns = ["LOCATION_ID", "LOCATION_TYPE", "EQUIP_CODE", "EQUIP_CODE_TYPE","LOCATION_HEAD_FLAG","RESOURCE_CATEGORY"];
+/sap/tm/trp/db/stock/t_stock_config.hdbtable
+-----------------------------------------------------------------
+17c17
+< table.primaryKey.pkcolumns = ["ID"];
+\ No newline at end of file
+---
+> table.primaryKey.pkcolumns = ["ID", "RESOURCE_CATEGORY"];
+\ No newline at end of file
+/sap/tm/trp/db/systemmanagement/t_equipment_group.hdbtable
+-----------------------------------------------------------------
+20c20,21
+<   {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;}
+---
+>   {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;},
+>   {name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/systemmanagement/t_location_group.hdbtable
+-----------------------------------------------------------------
+5,6c5,10
+<     {name = "NAME"; sqlType = VARCHAR; length = 50 ; nullable = false;},
+<     {name = "FLAG"; sqlType = INTEGER; nullable = false;}
+---
+>     {name = "NAME"; sqlType = VARCHAR; length = 50 ; nullable = false;unique = true;},
+>     {name = "FLAG"; sqlType = INTEGER; nullable = false;},
+>     {name = "CREATE_BY"; sqlType = BIGINT; comment="create user id";},
+>     {name = "CREATE_AT"; sqlType = TIMESTAMP;},
+>     {name = "LAST_MODIFIED_BY"; sqlType = BIGINT;},
+>     {name = "LAST_MODIFIED_AT"; sqlType = TIMESTAMP;}
+/sap/tm/trp/db/systemmanagement/t_map_provider.hdbtable
+-----------------------------------------------------------------
+9c9,10
+<     {name = "UUID"; sqlType = VARCHAR;  length = 32; }
+---
+>     {name = "UUID"; sqlType = VARCHAR;  length = 32; },
+>     {name = "DESC"; sqlType = VARCHAR; length = 500; }
+/sap/tm/trp/db/systemmanagement/t_out_division.hdbtable
+-----------------------------------------------------------------
+18c18,19
+<   {name = "LAST_MODIFIED_BY"; sqlType = BIGINT;}
+---
+>   {name = "LAST_MODIFIED_BY"; sqlType = BIGINT;},
+>   {name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/systemmanagement/t_region_group.hdbtable
+-----------------------------------------------------------------
+11c11,12
+<   {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;}
+---
+>   {name = "CODE";sqlType = NVARCHAR; length = 20; nullable = true;unique = true;},
+>   {name = "RESOURCE_CATEGORY";sqlType = VARCHAR; length = 50;}
+/sap/tm/trp/db/systemmanagement/t_zone_group.hdbtable
+-----------------------------------------------------------------
+4c4
+<     {name = "ID"; sqlType = VARCHAR; length = 22; nullable = false;},
+---
+>     {name = "ID"; sqlType = INTEGER; nullable = false;},
+11a12
+> 
+/sap/tm/trp/db/systemmanagement/user/t_date_format.hdbtable
+-----------------------------------------------------------------
+4c4
+<     {name = "DATE_FORMAT_ID"; sqlType = VARCHAR; length = 22; nullable = false;},
+---
+>     {name = "DATE_FORMAT_ID"; sqlType = INTEGER; nullable = false;},
+7a8
+> 
+/sap/tm/trp/db/systemmanagement/user/t_date_format_t.hdbtable
+-----------------------------------------------------------------
+4c4
+<     {name = "ID"; sqlType = VARCHAR; length = 22; nullable = false;},
+---
+>     {name = "ID"; sqlType = INTEGER; nullable = false;},
+11a12
+> 
+/sap/tm/trp/db/systemmanagement/user/t_decimal_notation.hdbtable
+-----------------------------------------------------------------
+4c4
+<     {name = "DECIMAL_NOTATION_ID"; sqlType = VARCHAR; length = 22; nullable = false;},
+---
+>     {name = "DECIMAL_NOTATION_ID"; sqlType = INTEGER; nullable = false;},
+7a8
+> 
+/sap/tm/trp/db/systemmanagement/user/t_decimal_notation_t.hdbtable
+-----------------------------------------------------------------
+15c15
+<     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 50;},
+17c17
+<     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 50;},
+/sap/tm/trp/routing/db/dataset/t_connection.hdbtable
+-----------------------------------------------------------------
+10c10
+<     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 50;},
+12c12
+<     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 50;},
+14c14
+<     {name = "REPLICATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "REPLICATED_BY"; sqlType = NVARCHAR; length = 50;},
+/sap/tm/trp/routing/db/dataset/t_dataset.hdbtable
+-----------------------------------------------------------------
+4a5
+>     {name = "NAME"; sqlType = NVARCHAR; length = 100; },
+5a7
+>     {name = "EXTERNAL_TYPE"; sqlType = NVARCHAR; length = 50; },
+14c16
+<     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 50;},
+16c18
+<     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 50;},
+/sap/tm/trp/routing/db/dataset/t_path.hdbtable
+-----------------------------------------------------------------
+13c13
+<     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 50;},
+15c15
+<     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 50;},
+/sap/tm/trp/routing/db/dataset/t_path_departure_rule.hdbtable
+-----------------------------------------------------------------
+11c11
+<     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 50;},
+13c13
+<     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 50;},
+/sap/tm/trp/routing/db/dataset/t_trip.hdbtable
+-----------------------------------------------------------------
+10c10
+< table.primaryKey.pkcolumns = ["DATASET_ID", "TRIP_ID", "SEQUENCE"];
+\ No newline at end of file
+---
+> table.primaryKey.pkcolumns = ["DATASET_ID", "TRIP_ID", "SEQUENCE", "CAPACITY_UOM"];
+\ No newline at end of file
+/sap/tm/trp/routing/db/dataset/t_trip_sequence_capacity.hdbtable
+-----------------------------------------------------------------
+14c14
+<     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 50;},
+16c16
+<     {name = "REFRESHED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "REFRESHED_BY"; sqlType = NVARCHAR; length = 50;},
+18c18
+<     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 50;},
+/sap/tm/trp/routing/db/path/t_network_model.hdbtable
+-----------------------------------------------------------------
+19c19
+<     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CREATED_BY"; sqlType = NVARCHAR; length = 50;},
+21c21
+<     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 10;},
+---
+>     {name = "CHANGED_BY"; sqlType = NVARCHAR; length = 50;},
+/sap/tm/trp/routing/db/path/t_path.hdbtable
+-----------------------------------------------------------------
+21,23c21
+<     {name = "HANDLING_TYPE"; sqlType = VARCHAR; length = 10; },
+<     {name = "CAPACITY"; sqlType = DOUBLE; },
+<     {name = "CAPACITY_UOM"; sqlType = NVARCHAR; length = 10; }
+---
+>     {name = "HANDLING_TYPE"; sqlType = VARCHAR; length = 10; }
+/sap/tm/trp/routing/db/path/t_route_sequence.hdbtable
+-----------------------------------------------------------------
+=============================================================

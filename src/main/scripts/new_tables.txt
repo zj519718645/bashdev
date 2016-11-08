@@ -1,0 +1,16 @@
+sap.tm.trp.db.planningcockpit::t_load_discharge_activity_detail
+sap.tm.trp.db.semantic.common::t_config
+sap.tm.trp.db.semantic.common::t_partnertype_t
+sap.tm.trp.db.semantic.resource::t_resource_category
+sap.tm.trp.db.systemmanagement.customization::t_config_t
+sap.tm.trp.db.systemmanagement.customization::t_map_provider_t
+sap.tm.trp.db.systemmanagement.customization::t_repositioning_config_parameters_t
+sap.tm.trp.db.systemmanagement.customization::t_repositioning_config_parameters_value
+sap.tm.trp.db.systemmanagement.customization::t_resource_category_extended_columns
+sap.tm.trp.db.systemmanagement.customization::t_resource_category_object_registration
+sap.tm.trp.db.systemmanagement.customization::t_resource_category_settings
+sap.tm.trp.db.systemmanagement.customization::t_resource_category_settings_t
+sap.tm.trp.db.systemmanagement.customization::t_resource_group
+sap.tm.trp.db.systemmanagement::t_config_cust
+sap.tm.trp.db.systemmanagement.user::t_role_resource
+sap.tm.trp.routing.db.path::t_route_sequence_capacity
